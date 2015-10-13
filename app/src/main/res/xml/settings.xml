@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="general">
+
+        <CheckBoxPreference
+            android:key="gps"
+            android:title="GPS"
+            android:summary="Let NZ Schools use GPS to determine any nearby schools"
+            android:defaultValue="True"/>
+        <ListPreference
+            android:key="distance"
+            android:title="Distance"
+            android:summary="The approximate distance to search for nearby schools"
+            android:entries="@array/Distance"
+            android:entryValues="@array/Distance"
+            android:defaultValue="1 km"/>
+        <ListPreference
+            android:key="region"
+            android:title="Default Region"
+            android:summary="The default region to show on startup" />
+    </PreferenceCategory>
+</PreferenceScreen>
