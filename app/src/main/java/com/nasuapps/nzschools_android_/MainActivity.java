@@ -2,14 +2,26 @@ package com.nasuapps.nzschools_android_;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
+import adapters.ViewPagerAdapter;
+import helpers.DatabaseHelper;
+import helpers.JsonHelper;
+import helpers.TaskHelper;
+import models.Directory;
+
 public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper _db;
     private TabLayout _tabLayout;
+    private ArrayList<Directory> _directories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +31,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.search));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.nearby));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.favourites));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         _tabLayout = tabLayout;
+
+        _directories = new ArrayList<>();
+        _db = new DatabaseHelper(this);
+
+        if (_db.getDirectoriesCount() == 0)
+        {
+            String directories = JsonHelper.loadJsonFromAsset(this, "directories.json");
+            new TaskHelper(this).execute(directories);
+        }
+        else
+        {
+            onTaskComplete();
+        }
     }
 
     @Override
@@ -50,5 +74,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onTaskComplete()
+    {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        PagerAdapter adapterFrag = new ViewPagerAdapter
+                (getSupportFragmentManager(), _tabLayout.getTabCount());
+        viewPager.setAdapter(adapterFrag);
     }
 }
