@@ -7,4 +7,11 @@
     <string name="search">SEARCH</string>
     <string name="favourites">FAVOURITES</string>
     <string name="nearby">NEARBY</string>
+
+    <string name="region">REGION</string>
+    <string name="city">CITY</string>
+    <string name="suburb">SUBURB</string>
+    <string name="gender">GENDER</string>
+    <string name="school_type">SCHOOL TYPE</string>
+    <string name="decile">DECILE</string>
 </resources>

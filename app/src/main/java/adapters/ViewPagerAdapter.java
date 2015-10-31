@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.nasuapps.nzschools_android_.SearchFragment;
+
 /**
  * Created by xzbla on 12/10/2015.
  */
@@ -17,7 +19,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int index) {
-        return null;
+
+        switch (index) {
+            case 0:
+                return new SearchFragment();
+            case 1:
+                return new SearchFragment();
+            case 2:
+                return new SearchFragment();
+            default:
+                return null;
+        }
     }
 
     @Override

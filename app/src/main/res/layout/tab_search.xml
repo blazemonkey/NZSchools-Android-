@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView android:id="@+id/nearby_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip">
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/region"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_region"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/city"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_city"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/suburb"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_suburb"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/gender"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_gender"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/school_type"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_school_type"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dip">
+
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/decile"
+                        android:textStyle="bold"/>
+
+                    <Spinner android:id="@+id/spinner_decile"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+
+                    <View style="@style/Divider"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button android:id="@+id/button_search"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dip"
+                android:text="search"
+                android:background="@color/appAccent"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

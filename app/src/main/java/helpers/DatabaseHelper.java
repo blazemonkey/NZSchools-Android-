@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import models.Directory;
 
@@ -270,9 +269,9 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         return directory;
     }
 
-    public List<Directory> getAllDirectories()
+    public ArrayList<Directory> getAllDirectories()
     {
-        List<Directory> directoriesList = new ArrayList<>();
+        ArrayList<Directory> directoriesList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_DIRECTORIES;
 
