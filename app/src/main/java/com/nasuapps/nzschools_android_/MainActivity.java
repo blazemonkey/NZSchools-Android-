@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
-import adapters.ViewPagerAdapter;
+import adapters.MainViewPagerAdapter;
 import helpers.DatabaseHelper;
 import helpers.JsonHelper;
 import helpers.TaskHelper;
@@ -23,6 +23,8 @@ import models.Directory;
 import models.Region;
 
 public class MainActivity extends AppCompatActivity {
+    public final static String SEARCH_MESSAGE = "com.nasuapps.nzschools_android_.SEARCH_MESSAGE";
+
     private DatabaseHelper _db;
     private TabLayout _tabLayout;
     private ArrayList<Directory> _directories;
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        PagerAdapter adapterFrag = new ViewPagerAdapter
+        PagerAdapter adapterFrag = new MainViewPagerAdapter
                 (getSupportFragmentManager(), _tabLayout.getTabCount());
         viewPager.setAdapter(adapterFrag);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(_tabLayout));

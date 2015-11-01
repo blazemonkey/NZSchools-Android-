@@ -5,7 +5,7 @@ import android.text.TextUtils;
 /**
  * Created by xzbla on 13/10/2015.
  */
-public class Directory
+public class Directory implements Comparable
 {
     private int _id;
     private int _schoolId;
@@ -439,5 +439,10 @@ public class Directory
 
         address = address + ", " + getCity();
         return address;
+    }
+
+    @Override
+    public int compareTo(Object another) {
+        return getName().compareToIgnoreCase(((Directory)another).getName());
     }
 }

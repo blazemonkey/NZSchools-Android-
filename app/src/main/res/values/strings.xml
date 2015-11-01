@@ -7,6 +7,8 @@
     <string name="search">SEARCH</string>
     <string name="favourites">FAVOURITES</string>
     <string name="nearby">NEARBY</string>
+    <string name="results">RESULTS</string>
+    <string name="map">MAP</string>
 
     <string name="region">REGION</string>
     <string name="city">CITY</string>

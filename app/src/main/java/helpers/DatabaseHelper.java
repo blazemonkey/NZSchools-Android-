@@ -178,7 +178,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_DIRECTORIES, new String[] {
+        Cursor cursor = db.query(TABLE_DIRECTORIES, new String[]{
                         KEY_ID,
                         KEY_SCHOOL_ID,
                         KEY_NAME,
@@ -220,7 +220,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
                         KEY_CHANGE_ID,
                         KEY_STATUS
                 }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -277,6 +277,93 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Directory directory = new Directory(
+                        Integer.parseInt(cursor.getString(0)),
+                        Integer.parseInt(cursor.getString(1)),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getString(8),
+                        cursor.getString(9),
+                        cursor.getString(10),
+                        cursor.getString(11),
+                        cursor.getString(12),
+                        cursor.getString(13),
+                        cursor.getString(14),
+                        cursor.getString(15),
+                        cursor.getString(16),
+                        cursor.getString(17),
+                        cursor.getString(18),
+                        cursor.getString(19),
+                        cursor.getString(20),
+                        cursor.getString(21),
+                        cursor.getString(22),
+                        cursor.getString(23),
+                        cursor.getString(24),
+                        cursor.getString(25),
+                        cursor.getString(26),
+                        cursor.getString(27),
+                        cursor.getDouble(28),
+                        cursor.getDouble(29),
+                        Integer.parseInt(cursor.getString(30)),
+                        Integer.parseInt(cursor.getString(31)),
+                        Integer.parseInt(cursor.getString(32)),
+                        Integer.parseInt(cursor.getString(33)),
+                        Integer.parseInt(cursor.getString(34)),
+                        Integer.parseInt(cursor.getString(35)),
+                        Integer.parseInt(cursor.getString(36)),
+                        Integer.parseInt(cursor.getString(37)),
+                        Integer.parseInt(cursor.getString(38)),
+                        Integer.parseInt(cursor.getString(39))== 1 ? true : false);
+                directoriesList.add(directory);
+            } while (cursor.moveToNext());
+        }
+
+        return directoriesList;
+    }
+
+    public ArrayList<Directory> getDirectories(String region, String city, String suburb,
+                                               String genderOfStudents, String schoolType,
+                                               String decile)
+    {
+        ArrayList<Directory> directoriesList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_DIRECTORIES + " WHERE " +
+                KEY_REGION + "='" + region + " Region'";
+
+        if (!city.equals("All Cities"))
+        {
+            query = query + " AND " + KEY_CITY + "='" + city + "'";
+        }
+
+        if (!suburb.equals("All Suburbs"))
+        {
+            query = query + " AND " + KEY_SUBURB + "='" + suburb + "'";
+        }
+
+        if (!genderOfStudents.equals("All Genders"))
+        {
+            query = query + " AND " + KEY_GENDER_OF_STUDENTS + "='" + genderOfStudents + "'";
+        }
+
+        if (!schoolType.equals("All School Types"))
+        {
+            query = query + " AND " + KEY_SCHOOL_TYPE + "='" + schoolType + "'";
+        }
+
+        if (!decile.equals("All Deciles"))
+        {
+            query = query + " AND " + KEY_DECILE + "='" + decile + "'";
+        }
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

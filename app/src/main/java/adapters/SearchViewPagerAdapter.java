@@ -4,15 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.nasuapps.nzschools_android_.ResultsFragment;
 import com.nasuapps.nzschools_android_.SearchFragment;
 
 /**
- * Created by xzbla on 12/10/2015.
+ * Created by xzbla on 31/10/2015.
  */
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class SearchViewPagerAdapter  extends FragmentStatePagerAdapter {
     private int _numOfTabs;
 
-    public ViewPagerAdapter(FragmentManager fm, int numOfTabs) {
+    public SearchViewPagerAdapter(FragmentManager fm, int numOfTabs) {
         super(fm);
         _numOfTabs = numOfTabs;
     }
@@ -22,11 +23,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (index) {
             case 0:
-                return new SearchFragment();
+                return new ResultsFragment();
             case 1:
-                return new SearchFragment();
-            case 2:
-                return new SearchFragment();
+                return new ResultsFragment();
             default:
                 return null;
         }

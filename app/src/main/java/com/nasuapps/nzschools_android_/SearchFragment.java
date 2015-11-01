@@ -1,5 +1,6 @@
 package com.nasuapps.nzschools_android_;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -17,13 +19,20 @@ import java.util.HashMap;
 
 import adapters.CustomSpinnerAdapter;
 import models.Region;
+import models.Result;
 
 /**
  * Created by xzbla on 18/10/2015.
  */
-public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private View _rootView;
     private Region _selectedRegion;
+    private String _selectedCity;
+    private String _selectedSuburb;
+    private String _selectedGender;
+    private String _selectedSchoolType;
+    private String _selectedDecile;
+
     private HashMap<String, ArrayList<String>> _cities;
     private HashMap<String, ArrayList<String>> _suburbs;
 
@@ -59,14 +68,20 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         Spinner genderSpinner = (Spinner)rootView.findViewById(R.id.spinner_gender);
         CustomSpinnerAdapter<String> genderAdapter = new CustomSpinnerAdapter<>(getContext(), _genders);
         genderSpinner.setAdapter(genderAdapter);
+        genderSpinner.setOnItemSelectedListener(this);
 
         Spinner schoolTypeSpinner = (Spinner)rootView.findViewById(R.id.spinner_school_type);
         CustomSpinnerAdapter<String> schoolTypeAdapter = new CustomSpinnerAdapter<>(getContext(), _schoolTypes);
         schoolTypeSpinner.setAdapter(schoolTypeAdapter);
+        schoolTypeSpinner.setOnItemSelectedListener(this);
 
         Spinner decileSpinner = (Spinner)rootView.findViewById(R.id.spinner_decile);
         CustomSpinnerAdapter<String> decileAdapter = new CustomSpinnerAdapter<>(getContext(), _deciles);
         decileSpinner.setAdapter(decileAdapter);
+        decileSpinner.setOnItemSelectedListener(this);
+
+        Button searchButton = (Button) rootView.findViewById(R.id.button_search);
+        searchButton.setOnClickListener(this);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
         String region = preferences.getString("region", "1");
@@ -98,6 +113,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
             case R.id.spinner_city:
             {
                 String selectedCity = (String)parent.getItemAtPosition(position);
+                _selectedCity = selectedCity;
 
                 ArrayList<String> suburbs = _suburbs.get(_selectedRegion.getName() + " Region-" + selectedCity);
                 if (suburbs == null)
@@ -107,6 +123,30 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
                         suburbs);
                 _suburbSpinner.setAdapter(suburbAdapter);
 
+                break;
+            }
+            case R.id.spinner_suburb:
+            {
+                String selectedSuburb = (String)parent.getItemAtPosition(position);
+                _selectedSuburb = selectedSuburb;
+                break;
+            }
+            case R.id.spinner_gender:
+            {
+                String selectedGender = (String)parent.getItemAtPosition(position);
+                _selectedGender = selectedGender;
+                break;
+            }
+            case R.id.spinner_school_type:
+            {
+                String selectedSchoolType = (String)parent.getItemAtPosition(position);
+                _selectedSchoolType = selectedSchoolType;
+                break;
+            }
+            case R.id.spinner_decile:
+            {
+                String selectedDecile = (String)parent.getItemAtPosition(position);
+                _selectedDecile = selectedDecile;
                 break;
             }
         }
@@ -124,5 +164,25 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         int res = getResources().getIdentifier(region.getImagePath().substring(0, region.getImagePath().length() - 4),
                 "drawable", getContext().getPackageName());
         imageView.setImageResource(res);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.button_search:
+            {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                Result result = new Result(_selectedRegion.getName(),
+                        _selectedCity,
+                        _selectedSuburb,
+                        _selectedGender,
+                        _selectedSchoolType,
+                        _selectedDecile);
+                intent.putExtra(MainActivity.SEARCH_MESSAGE, result);
+
+                startActivity(intent);
+            }
+        }
     }
 }
